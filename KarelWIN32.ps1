@@ -57,13 +57,13 @@ function KarelInstall {
     function CloneDeps {
         Set-Location -Path $tempDir
 
-        Write-Host "Сlonning: $pdcursesRepo"
+        Write-Host "Clonning: $pdcursesRepo"
         $output = (git clone $pdcursesRepo *>&1)
         if ($LASTEXITCODE -ne 0) {
             FatalError -message "Error clone: $pdcursesRepo`n$output"
         }
     
-        Write-Host "Сlonning: $karelRepo"
+        Write-Host "Clonning: $karelRepo"
         $output = (git clone $karelRepo *>&1)
         if ($LASTEXITCODE -ne 0) {
             FatalError -message "Error clone: $karelRepo`n$output"
@@ -242,7 +242,7 @@ function KarelInstall {
         } else {
             Copy-Item -Path "../stairs.kw" -Destination .
         }
-        
+
         ./test
 
         Set-Location -Path $originalDir
