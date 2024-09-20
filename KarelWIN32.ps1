@@ -131,7 +131,7 @@ function KarelInstall {
         catch {
             FatalError -message "Cant fix karel!!!!"
         }
-        
+
         Set-Location $originalDir
     }
     
@@ -236,9 +236,13 @@ function KarelInstall {
             FatalError -message "Cant build test"
         }
 
-        if ($global:platform -eq "MSVC") { Set-Location -Path "./Debug" }
-
-        Copy-Item -Path "../stairs.kw" -Destination .
+        if ($global:platform -eq "MSVC") {
+            Set-Location -Path "./Debug"
+            Copy-Item -Path "../../stairs.kw" -Destination .
+        } else {
+            Copy-Item -Path "../stairs.kw" -Destination .
+        }
+        
         ./test
 
         Set-Location -Path $originalDir
@@ -274,7 +278,7 @@ function KarelInstall {
                 Write-Host ($tool + " - located") -ForegroundColor Green
             }
             else {
-                FatalError -message ($tool + " - cant locate required tool")
+                FatalError -message ($tool + " - cannot locate required tool")
             }
         }
     }
