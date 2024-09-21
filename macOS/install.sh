@@ -6,16 +6,25 @@ if ! command -v git &> /dev/null; then
   echo "Git not found. You must install it from https://git-scm.com/downloads" >&2
   exit 1
 else
-    echo "Git found - OK"
+  echo "Git found - OK"
 fi
 
 # clone
-#echo "Download karel core src"
-#git clone git@github.com:Tim4ig/karel-install.git
-#if ! cd ./karel-install/macOS; then
-#    echo "Error: Failed to change directory to ./karel-install/macOS" >&2
-#    exit 1
-#fi
+current_dir=$(basename "$PWD")
+if [ "$current_dir" == "karel-install" ]; then
+  echo "Dir name is $PWD, clone skipped."
+  if ! cd ./macOS; then
+    echo "Error: Failed to change directory to ./macOS" >&2
+    exit 1
+  fi
+else
+  echo "Download karel core src"
+  git clone git@github.com:Tim4ig/karel-install.git
+  if ! cd ./karel-install/macOS; then
+    echo "Error: Failed to change directory to ./karel-install/macOS" >&2
+    exit 1
+  fi
+fi
 
 echo "Checking if all tools for build install"
 /bin/bash ./shHelpers/installBrew.sh
