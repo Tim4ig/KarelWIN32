@@ -10,12 +10,12 @@ else
 fi
 
 # clone
-echo "Download karel core src"
-git clone git@github.com:Tim4ig/karel-install.git
-if ! cd ./karel-install/macOS; then
-    echo "Error: Failed to change directory to ./karel-install/macOS" >&2
-    exit 1
-fi
+#echo "Download karel core src"
+#git clone git@github.com:Tim4ig/karel-install.git
+#if ! cd ./karel-install/macOS; then
+#    echo "Error: Failed to change directory to ./karel-install/macOS" >&2
+#    exit 1
+#fi
 
 echo "Checking if all tools for build install"
 /bin/bash ./shHelpers/installBrew.sh
@@ -28,5 +28,6 @@ cmake --build build-release
 echo "Install"
 cmake --install build-release
 echo "Configure PATH"
-export PATH="$HOME/local/bin:$PATH"
-echo "Terminal window can be closed, dir can be removed. System reboot recommended."
+/bin/bash ./shHelpers/configurePATH.sh
+echo "Terminal window can be closed, dir can be removed."
+echo "System should be rebooted to detect changes."
